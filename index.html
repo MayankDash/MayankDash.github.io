@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mayank Dash</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Mayank Dash, AI Engineer at TatvaCare. Builds AI agents, harnesses, small language models and automation flows on scalable backends. M.Tech CSE (Data Science), VIT Vellore. SDG Hackathon winner, IIT Madras.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-bleed bands, one job each. Hero (who + what for) → What I do → Experience → Skills
+   → Projects (filterable) → GitHub build log (contribution-graph grid) → Hackathons → Contact. */
+:root{
+  --bg:#0B1531;
+  --bg-2:#0F1C40;
+  --surface:#13224D;
+  --line:#26386E;
+  --fg:#EEF1FA;
+  --muted:#9BA7CA;
+  --accent:#FFB547;
+  --live:#6EE7C8;
+  --on-accent:#1A1203;
+  --cell:#1A2A5A;
+
+  --display:"Syne","Arial Black",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+@media (prefers-color-scheme: light){
+  :root:not([data-theme="dark"]){
+    --bg:#F2F4FA; --bg-2:#E7EBF6; --surface:#FFFFFF; --line:#D2D8EA;
+    --fg:#0B1531; --muted:#4A5579; --accent:#B35F00; --live:#0B8566; --on-accent:#FFFFFF; --cell:#DDE3F2;
+    color-scheme:light;
+  }
+}
+:root[data-theme="light"]{
+  --bg:#F2F4FA; --bg-2:#E7EBF6; --surface:#FFFFFF; --line:#D2D8EA;
+  --fg:#0B1531; --muted:#4A5579; --accent:#B35F00; --live:#0B8566; --on-accent:#FFFFFF; --cell:#DDE3F2;
+  color-scheme:light;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+::selection{background:var(--accent);color:var(--on-accent)}
+section[id],header[id]{scroll-margin-top:72px}
+
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0}
+p{margin:0}
+
+/* Nav */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 84%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid color-mix(in srgb,var(--line) 60%,transparent)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.mark{font-family:var(--display);font-weight:800;font-size:1.15rem;text-decoration:none;letter-spacing:-.02em}
+.mark span{color:var(--accent)}
+.nav ul{display:flex;gap:24px;list-style:none;margin:0;padding:0;font-size:.92rem}
+.nav ul a{text-decoration:none;color:var(--muted);transition:color .2s}
+.nav ul a:hover{color:var(--fg)}
+@media (max-width:860px){.nav ul{display:none}}
+
+.status{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.78rem;padding:6px 12px 6px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);white-space:nowrap}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--live);animation:pulse 2.2s infinite;flex:none}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 55%,transparent)}70%{box-shadow:0 0 0 9px transparent}100%{box-shadow:0 0 0 0 transparent}}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:600;font-size:.96rem;padding:13px 20px;border-radius:999px;text-decoration:none;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;transition:transform .2s ease,border-color .2s ease}
+.btn:hover{transform:translateY(-2px);border-color:var(--fg)}
+.btn.primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+#field{position:absolute;inset:0;width:100%;height:100%;display:block;-webkit-mask-image:linear-gradient(100deg,transparent 22%,#000 66%);mask-image:linear-gradient(100deg,transparent 22%,#000 66%)}
+@media (max-width:760px){#field{-webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 70%);mask-image:linear-gradient(180deg,#000 0%,transparent 70%);opacity:.5}}
+.hero .wrap{position:relative;z-index:1;padding-block:clamp(48px,8vw,104px) clamp(48px,7vw,88px);pointer-events:none}
+.hero .wrap a,.hero .wrap button{pointer-events:auto}
+.hero .status{margin-bottom:clamp(24px,3.5vw,36px)}
+.name{font-weight:800;font-size:clamp(3.2rem,11.5vw,9.4rem);line-height:.88;letter-spacing:-.045em}
+.name .ghost{display:block;color:transparent;-webkit-text-stroke:1.5px var(--fg)}
+.role{font-family:var(--display);font-weight:700;font-size:clamp(1.45rem,3.3vw,2.4rem);line-height:1.12;letter-spacing:-.02em;margin-top:clamp(20px,3vw,30px)}
+.role em{font-style:normal;color:var(--accent)}
+.lede{max-width:58ch;color:var(--muted);font-size:clamp(1.02rem,1.5vw,1.16rem);margin-top:16px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;margin-top:clamp(40px,5vw,56px);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--line);max-width:980px}
+.fact{background:color-mix(in srgb,var(--bg) 88%,transparent);padding:16px 18px;display:grid;gap:4px;min-width:0}
+.fact span{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.fact b{font-weight:600;font-size:.95rem;line-height:1.35}
+@media (max-width:860px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:440px){.facts{grid-template-columns:1fr}}
+
+/* Sections */
+section.band{padding-block:clamp(64px,9vw,112px)}
+.alt{background:var(--bg-2);border-block:1px solid var(--line)}
+.head{display:grid;gap:12px;margin-bottom:clamp(32px,4.5vw,52px);max-width:760px}
+.head h2{font-weight:800;font-size:clamp(2rem,4.6vw,3.3rem);line-height:1.02;letter-spacing:-.03em}
+.head p{color:var(--muted);max-width:62ch;font-size:1.05rem}
+
+/* What I do */
+.offer{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:900px){.offer{grid-template-columns:1fr}}
+.o{padding:28px;border:1px solid var(--line);border-radius:16px;background:var(--surface);display:grid;gap:12px;align-content:start}
+.o .k{font-family:var(--mono);font-size:.78rem;color:var(--accent)}
+.o h3{font-weight:700;font-size:1.45rem;letter-spacing:-.01em;line-height:1.15}
+.o p{color:var(--muted);font-size:.98rem}
+.o ul{margin:4px 0 0;padding:0;list-style:none;display:grid;gap:6px;font-size:.94rem}
+.o li{display:flex;gap:10px}
+.o li::before{content:"→";color:var(--accent);font-family:var(--mono)}
+.forline{margin-top:24px;padding:18px 22px;border:1px dashed var(--line);border-radius:14px;color:var(--muted);font-size:1rem}
+.forline b{color:var(--fg);font-weight:600}
+
+/* Experience */
+.exp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:clamp(28px,5vw,64px);align-items:start}
+@media (max-width:900px){.exp{grid-template-columns:1fr}}
+.job{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:clamp(22px,3vw,32px);display:grid;gap:18px;min-width:0}
+.job-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px}
+.job h3{font-weight:700;font-size:1.6rem;letter-spacing:-.015em}
+.job h3 em{font-style:normal;color:var(--accent)}
+.when{font-family:var(--mono);font-size:.8rem;color:var(--live)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:14px;padding:12px 0;border-top:1px dashed var(--line)}
+.steps li:first-child{border-top:0;padding-top:0}
+.steps li::before{counter-increment:s;content:counter(s);font-family:var(--mono);font-size:.75rem;color:var(--accent);width:24px;height:24px;border:1px solid color-mix(in srgb,var(--accent) 50%,var(--line));border-radius:50%;display:grid;place-items:center;margin-top:1px}
+.steps b{font-weight:600}
+.steps span{color:var(--muted);display:block;font-size:.95rem}
+.edu{display:grid;gap:16px}
+.edu-card{border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:grid;gap:4px;background:var(--bg)}
+.edu-card .eyebrow{color:var(--accent)}
+.edu-card h3{font-weight:700;font-size:1.2rem;letter-spacing:-.01em;margin-top:6px}
+.edu-card p{color:var(--muted);font-size:.95rem}
+
+/* Skills */
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px}
+@media (max-width:820px){.skills{grid-template-columns:1fr}}
+.sk{display:grid;grid-template-columns:150px minmax(0,1fr);gap:16px;padding:18px 0;border-top:1px solid var(--line);align-items:start}
+.sk h3{font-family:var(--mono);font-weight:500;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding-top:6px}
+@media (max-width:480px){.sk{grid-template-columns:1fr;gap:10px}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-family:var(--mono);font-size:.78rem;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+.chip.hot{border-color:color-mix(in srgb,var(--accent) 55%,var(--line));color:var(--accent)}
+
+/* Projects */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.filters button{font:500 .88rem var(--body);padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;transition:all .2s}
+.filters button:hover{color:var(--fg);border-color:var(--fg)}
+.filters button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.filters .n{font-family:var(--mono);font-size:.75rem;opacity:.7;margin-left:6px}
+.projects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+@media (max-width:1000px){.projects{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.projects{grid-template-columns:1fr}}
+.p{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:24px;display:flex;flex-direction:column;gap:12px;min-width:0;transition:border-color .2s,transform .2s}
+.p:hover{border-color:color-mix(in srgb,var(--accent) 60%,var(--line));transform:translateY(-3px)}
+.p-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.cat{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.yr{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.p h3{font-weight:700;font-size:1.3rem;line-height:1.15;letter-spacing:-.01em}
+.p p{color:var(--muted);font-size:.95rem}
+.p .tech{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+.p .tech span{font-family:var(--mono);font-size:.72rem;padding:3px 8px;border-radius:6px;background:var(--bg-2);border:1px solid var(--line);color:var(--muted)}
+.p .go{font-family:var(--mono);font-size:.8rem;text-decoration:none;color:var(--fg);display:inline-flex;gap:8px;align-items:center;padding-top:10px;border-top:1px dashed var(--line)}
+.p .go:hover{color:var(--accent)}
+.p .go.off{color:var(--muted)}
+
+.p.feature{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(20px,4vw,48px);padding:clamp(24px,3.5vw,40px);box-shadow:0 30px 80px -44px color-mix(in srgb,var(--accent) 40%,transparent)}
+@media (max-width:860px){.p.feature{grid-template-columns:1fr}}
+.p.feature h3{font-size:clamp(1.7rem,3.4vw,2.4rem);letter-spacing:-.025em}
+.p.feature .left{display:flex;flex-direction:column;gap:14px;min-width:0}
+.p.feature ul{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.p.feature li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px;font-size:.96rem;color:var(--muted)}
+.p.feature li b{color:var(--fg);font-weight:600}
+.p.feature li::before{content:"▸";color:var(--accent)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-family:var(--mono);font-size:.76rem}
+.flow span{padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--bg-2)}
+.flow span.hl{border-color:var(--accent);color:var(--accent)}
+.flow i{font-style:normal;color:var(--muted)}
+
+/* GitHub build log */
+.gh{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+@media (max-width:900px){.gh{grid-template-columns:1fr}}
+.graph{border:1px solid var(--line);border-radius:16px;background:var(--surface);padding:clamp(18px,3vw,28px);min-width:0}
+.graph-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.graph-head b{font-family:var(--mono);font-weight:500;font-size:.9rem}
+.graph-head span{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:44px repeat(12,minmax(0,1fr));gap:5px;align-items:center}
+.grid .m{font-family:var(--mono);font-size:.66rem;color:var(--muted);text-align:center}
+.grid .y{font-family:var(--mono);font-size:.75rem;color:var(--muted)}
+.cell{aspect-ratio:1;max-width:100%;border-radius:5px;background:var(--cell);border:0;padding:0;position:relative}
+.cell.on{background:color-mix(in srgb,var(--live) 55%,var(--cell));cursor:pointer}
+.cell.on.two{background:var(--live)}
+.cell.on.ai{background:var(--accent)}
+.cell.on:hover,.cell.on[aria-pressed="true"]{outline:2px solid var(--fg);outline-offset:1px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.readout{margin-top:16px;padding:12px 14px;border-radius:10px;background:var(--bg-2);border:1px solid var(--line);font-size:.92rem;min-height:48px}
+.readout b{font-weight:600}
+.readout span{color:var(--muted)}
+.log{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.log li{display:grid;grid-template-columns:76px minmax(0,1fr);gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.log li:last-child{border-bottom:1px solid var(--line)}
+.log .t{font-family:var(--mono);font-size:.78rem;color:var(--accent);padding-top:2px}
+.log b{font-weight:600;display:block}
+.log span{color:var(--muted);font-size:.93rem}
+
+/* Hackathons */
+.wins{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:20px}
+@media (max-width:860px){.wins{grid-template-columns:1fr}}
+.trophy{border-radius:16px;padding:clamp(24px,3.5vw,36px);background:var(--accent);color:var(--on-accent);display:grid;gap:10px;align-content:space-between;min-height:220px}
+.trophy .eyebrow{color:var(--on-accent);opacity:.75}
+.trophy h3{font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);line-height:1;letter-spacing:-.03em}
+.trophy p{font-weight:500}
+.hlist{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+.hlist li{display:flex;justify-content:space-between;gap:16px;padding:16px 22px;border-top:1px solid var(--line);flex-wrap:wrap}
+.hlist li:first-child{border-top:0}
+.hlist b{font-weight:600}
+.hlist span{color:var(--muted);font-size:.92rem}
+
+/* Contact */
+.contact h2{font-weight:800;font-size:clamp(2.5rem,7.5vw,6rem);line-height:.94;letter-spacing:-.04em;max-width:13ch}
+.contact h2 em{font-style:normal;color:var(--accent)}
+.contact .lede{margin-top:20px}
+.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+@media (max-width:820px){.links{grid-template-columns:1fr}}
+.lk{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:18px 20px;display:grid;gap:6px;text-decoration:none;min-width:0;transition:border-color .2s}
+a.lk:hover{border-color:var(--accent)}
+.lk span{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lk b{font-family:var(--mono);font-weight:500;font-size:.95rem;overflow-wrap:anywhere}
+.lk .row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.copy{font:600 .8rem var(--body);padding:7px 12px;border-radius:999px;border:1px solid var(--accent);background:var(--accent);color:var(--on-accent);cursor:pointer;flex:none}
+#email{user-select:all}
+footer{border-top:1px solid var(--line)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:28px;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+
+@media (prefers-reduced-motion: no-preference){
+  .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+  .d1{animation-delay:.08s}.d2{animation-delay:.18s}.d3{animation-delay:.28s}.d4{animation-delay:.38s}.d5{animation-delay:.48s}
+  @keyframes rise{from{transform:translateY(16px)}to{transform:none}}
+}
+@media (prefers-reduced-motion: reduce){.dot{animation:none}html{scroll-behavior:auto}.btn,.p{transition:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Primary">
+  <div class="wrap">
+    <a class="mark" href="#top">MD<span>.</span></a>
+    <ul>
+      <li><a href="#what">What I do</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#github">GitHub</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <span class="status"><span class="dot" aria-hidden="true"></span>Now · TatvaCare</span>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow rise">AI Engineer · Agents · SLMs · Backend systems</p>
+    <h1 class="name rise d1">Mayank<span class="ghost">Dash.</span></h1>
+    <p class="role rise d2">AI Engineer at <em>TatvaCare</em>, building agents for healthcare.</p>
+    <p class="lede rise d3">I build AI agents, the harnesses that keep them reliable, small language models and automation flows. Underneath is a Java and Python backend background, so what I build is designed to scale in production.</p>
+    <div class="cta rise d4">
+      <a class="btn primary" href="#projects">See my work <span aria-hidden="true">→</span></a>
+      <a class="btn" href="https://github.com/MayankDash" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.68 0-1.26.45-2.28 1.18-3.09-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.58.23 2.75.11 3.04.74.81 1.18 1.83 1.18 3.09 0 4.41-2.69 5.38-5.26 5.67.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z"/></svg>
+        GitHub
+      </a>
+      <a class="btn" href="https://www.linkedin.com/in/mayank-dash-848bb325b" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    <div class="facts rise d5">
+      <div class="fact"><span>Now</span><b>AI Engineer, TatvaCare</b></div>
+      <div class="fact"><span>Focus</span><b>Agentic AI &amp; SLMs</b></div>
+      <div class="fact"><span>Education</span><b>M.Tech CSE (Data Science), VIT Vellore</b></div>
+      <div class="fact"><span>Recognition</span><b>SDG Hackathon Winner, IIT Madras</b></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="band" id="what">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">What I do</p>
+        <h2>I take AI from a prompt to a product.</h2>
+        <p>Most AI work stalls between a working demo and a reliable system. These are the three areas I work across to close that gap.</p>
+      </div>
+      <div class="offer">
+        <article class="o">
+          <p class="k">01 · Agents</p>
+          <h3>Agentic AI &amp; harnesses</h3>
+          <p>Agents that plan, call tools and act over many steps, wrapped in harnesses that keep them safe and testable.</p>
+          <ul><li>ReAct loops and tool calling</li><li>Sandboxing, guardrails, evaluation</li><li>Context and memory management</li></ul>
+        </article>
+        <article class="o">
+          <p class="k">02 · Models</p>
+          <h3>SLMs &amp; applied ML</h3>
+          <p>Small language models and ML pipelines tuned for real tasks, where accuracy, latency and cost all matter.</p>
+          <ul><li>SLM evaluation for domain tasks</li><li>Healthcare risk prediction</li><li>Product data analysis</li></ul>
+        </article>
+        <article class="o">
+          <p class="k">03 · Systems</p>
+          <h3>Backend &amp; system design</h3>
+          <p>The services underneath: APIs, authentication and architecture built to scale in production.</p>
+          <ul><li>Java, Spring Boot, GraphQL, FastAPI</li><li>API design and auth systems</li><li>AI automation flows</li></ul>
+        </article>
+      </div>
+      <p class="forline"><b>Reach out about:</b> AI agents and harnesses, putting SLMs into production, healthcare AI, or backend and system design for AI products.</p>
+    </div>
+  </section>
+
+  <section class="band alt" id="experience">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Experience</p>
+        <h2>From prompts to agent harnesses.</h2>
+        <p>My work at TatvaCare has moved one layer deeper into AI each step of the way.</p>
+      </div>
+      <div class="exp">
+        <div class="edu">
+          <div class="edu-card">
+            <p class="eyebrow">Education</p>
+            <h3>Integrated M.Tech, CSE (Data Science)</h3>
+            <p>Vellore Institute of Technology, Vellore</p>
+          </div>
+          <div class="edu-card">
+            <p class="eyebrow">Started as</p>
+            <h3>Java backend developer</h3>
+            <p>APIs, authentication systems and production-grade services. The foundation everything else is built on.</p>
+          </div>
+        </div>
+        <article class="job">
+          <div class="job-top">
+            <h3>AI Engineer · <em>TatvaCare</em></h3>
+            <span class="when">● Current</span>
+          </div>
+          <ol class="steps">
+            <li><div><b>Prompt engineering</b><span>Engineered prompts for LLM-powered healthcare features, improving output accuracy and consistency.</span></div></li>
+            <li><div><b>Small language models</b><span>Built and evaluated SLMs for domain-specific tasks, optimizing for accuracy, latency and cost.</span></div></li>
+            <li><div><b>Product data analysis</b><span>Analyzed product and user data across healthcare products to drive product and AI decisions.</span></div></li>
+            <li><div><b>Agentic AI</b><span>Built agent workflows with multi-step planning and tool calling, integrated with backend APIs.</span></div></li>
+            <li><div><b>Automation flows</b><span>Developed AI automation flows that replaced manual processes with end-to-end pipelines.</span></div></li>
+            <li><div><b>AI harnesses</b><span>Designed harnesses for agent orchestration, guardrails and evaluation in production.</span></div></li>
+          </ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="skills">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Skills</p>
+        <h2>The toolkit.</h2>
+        <p>Highlighted skills are the ones I use most right now.</p>
+      </div>
+      <div class="skills">
+        <div class="sk"><h3>AI Systems</h3><div class="chips"><span class="chip hot">Agent harnesses</span><span class="chip hot">Agentic AI</span><span class="chip">RAG</span><span class="chip">LangChain</span><span class="chip">LangGraph</span><span class="chip">ChromaDB</span><span class="chip">OpenAI API</span></div></div>
+        <div class="sk"><h3>AI &amp; LLMs</h3><div class="chips"><span class="chip hot">SLMs</span><span class="chip">LLMs</span><span class="chip">Prompt engineering</span><span class="chip">Transformers</span><span class="chip">PyTorch</span><span class="chip">PEFT</span><span class="chip">Quantization</span><span class="chip">NLP</span></div></div>
+        <div class="sk"><h3>Backend</h3><div class="chips"><span class="chip hot">Java</span><span class="chip">Spring Boot</span><span class="chip">GraphQL</span><span class="chip">REST APIs</span><span class="chip">FastAPI</span><span class="chip">Auth systems</span></div></div>
+        <div class="sk"><h3>Languages</h3><div class="chips"><span class="chip hot">Python</span><span class="chip">Java</span><span class="chip">SQL</span><span class="chip">TypeScript</span><span class="chip">JavaScript</span></div></div>
+        <div class="sk"><h3>Data &amp; ML</h3><div class="chips"><span class="chip">scikit-learn</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Data analysis</span><span class="chip">Anomaly detection</span></div></div>
+        <div class="sk"><h3>Frontend</h3><div class="chips"><span class="chip">React</span><span class="chip">Next.js</span><span class="chip">React Native</span><span class="chip">Tailwind</span></div></div>
+        <div class="sk"><h3>Infra &amp; Data</h3><div class="chips"><span class="chip">Docker</span><span class="chip">PostgreSQL</span><span class="chip">Supabase</span><span class="chip">CI/CD</span><span class="chip">Git</span></div></div>
+        <div class="sk"><h3>Foundations</h3><div class="chips"><span class="chip hot">System design</span><span class="chip">DSA</span><span class="chip">DBMS</span><span class="chip">Machine learning</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="projects">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Projects</p>
+        <h2>Things I've built.</h2>
+        <p>Pick an area to filter. Each card links to the code on GitHub.</p>
+      </div>
+
+      <div class="filters" role="group" aria-label="Filter projects">
+        <button type="button" id="f-all" data-f="all" aria-pressed="true">All<span class="n">9</span></button>
+        <button type="button" id="f-ai" data-f="ai" aria-pressed="false">AI &amp; Agents<span class="n">2</span></button>
+        <button type="button" id="f-health" data-f="health" aria-pressed="false">Healthcare ML<span class="n">2</span></button>
+        <button type="button" id="f-data" data-f="data" aria-pressed="false">Data &amp; NLP<span class="n">2</span></button>
+        <button type="button" id="f-web" data-f="web" aria-pressed="false">Full-stack<span class="n">3</span></button>
+      </div>
+
+      <div class="projects">
+        <article class="p feature" data-c="ai">
+          <div class="left">
+            <div class="p-top"><span class="cat">AI &amp; Agents · Featured</span><span class="yr">2026</span></div>
+            <h3>AI Agent Harness</h3>
+            <p>An LLM agent and the harness around it, built from scratch. It runs real tools safely, survives long sessions and remembers what it learned.</p>
+            <div class="flow" aria-label="Architecture: task to ReAct loop to tools to Docker sandbox, with compaction and RAG memory">
+              <span>Task</span><i>→</i><span class="hl">ReAct loop</span><i>→</i><span>Tool registry</span><i>→</i><span class="hl">Docker sandbox</span><i>↺</i><span>Compaction + RAG memory</span>
+            </div>
+            <div class="tech"><span>Python</span><span>OpenAI API</span><span>Docker</span><span>ChromaDB</span></div>
+          </div>
+          <ul>
+            <li><span>Built a <b>ReAct agent loop</b> with pluggable tools (bash, filesystem, git, web search) and step budgets that stop runaway loops.</span></li>
+            <li><span><b>Sandboxed</b> every agent-run command in auto-provisioned Docker containers, isolating LLM-generated code from the host.</span></li>
+            <li><span>Implemented <b>context compaction</b> with auto-summarization and disk offload to keep long sessions within token limits.</span></li>
+            <li><span>Added <b>self-updating project memory</b> (AGENTS.md) and a <b>RAG pipeline</b> over OpenAI embeddings and ChromaDB.</span></li>
+          </ul>
+        </article>
+
+        <article class="p" data-c="health">
+          <div class="p-top"><span class="cat">Healthcare ML</span><span class="yr">2026</span></div>
+          <h3>Patient Digital Twin</h3>
+          <p>Metabolic risk prediction on NHANES 2017–18 health data, served through an API with what-if scenarios and the top risk drivers for each patient, plus a React dashboard.</p>
+          <div class="tech"><span>Python</span><span>scikit-learn</span><span>FastAPI</span><span>React</span></div>
+          <a class="go" href="https://github.com/MayankDash/Patient-Digital-Twin-framework" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </article>
+
+        <article class="p" data-c="health">
+          <div class="p-top"><span class="cat">Healthcare ML</span><span class="yr">2026</span></div>
+          <h3>ANFIS Diabetes Model</h3>
+          <p>Diabetes prediction that combines fuzzy-logic rules with a neural model, so predictions stay explainable. Benchmarked against standard ML models.</p>
+          <div class="tech"><span>Python</span><span>Fuzzy logic</span><span>Neural nets</span><span>scikit-learn</span></div>
+          <a class="go" href="https://github.com/MayankDash/ANFIS_Based_Diabetes_Model" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </article>
+
+        <article class="p" data-c="ai">
+          <div class="p-top"><span class="cat">AI &amp; Agents</span><span class="yr">2025</span></div>
+          <h3>TaskShell</h3>
+          <p>A command shell you talk to in plain English. An NLP engine parses and disambiguates requests, then turns them into validated system operations, available through a CLI, a GUI and an API.</p>
+          <div class="tech"><span>Python</span><span>NLP</span><span>FastAPI</span></div>
+          <a class="go" href="https://github.com/MayankDash/TaskShell" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </article>
+
+        <article class="p" data-c="data">
+          <div class="p-top"><span class="cat">Data &amp; NLP</span><span class="yr">2026</span></div>
+          <h3>Aadhaar UIDAI Data Exploration</h3>
+          <p>Built for the UIDAI Hackathon. District-level analysis of Aadhaar enrolment and biometric data, with a digital-maturity index, anomaly detection and India-wide map visualizations.</p>
+          <div class="tech"><span>Python</span><span>Pandas</span><span>Anomaly detection</span><span>GeoJSON</span></div>
+          <a class="go" href="https://github.com/MayankDash/Aadhar_UIDAI_DataExploration" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </article>
+
+        <article class="p" data-c="data">
+          <div class="p-top"><span class="cat">Data &amp; NLP</span><span class="yr">2026</span></div>
+          <h3>Multi-Domain Sentiment Analysis</h3>
+          <p>A TF-IDF and logistic regression pipeline that classifies sentiment across domains, with a FastAPI backend and a React dashboard to upload data and read the results.</p>
+          <div class="tech"><span>Python</span><span>scikit-learn</span><span>FastAPI</span><span>React + TS</span></div>
+          <a class="go" href="https://github.com/MayankDash/Multi-Domain-Sentiment-Analysis-using-TF-IDF" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </article>
+
+        <article class="p" data-c="web">
+          <div class="p-top"><span class="cat">Full-stack</span><span class="yr">2025</span></div>
+          <h3>Samadhan</h3>
+          <p>A civic issue reporting platform. Citizens raise tickets from a mobile app, and an admin dashboard shows issue hotspots on a live map.</p>
+          <div class="tech"><span>React Native</span><span>Next.js</span><span>Supabase</span><span>Maps</span></div>
+          <a class="go" href="https://github.com/MayankDash/samadhan" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </article>
+
+        <article class="p" data-c="web">
+          <div class="p-top"><span class="cat">Full-stack</span><span class="yr">2026</span></div>
+          <h3>House Decor</h3>
+          <p>A home-decor store with a GraphQL API layer, full authentication flows, cart, checkout, orders and a wishlist.</p>
+          <div class="tech"><span>React + TS</span><span>GraphQL</span><span>Apollo</span><span>Zustand</span></div>
+          <a class="go" href="https://github.com/MayankDash/houseDecor" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </article>
+
+        <article class="p" data-c="web">
+          <div class="p-top"><span class="cat">Full-stack</span><span class="yr">2025</span></div>
+          <h3>Balancio</h3>
+          <p>AI-powered financial management for early-stage startups, with bookkeeping, cash-flow views, CSV visualizations and an AI assistant.</p>
+          <div class="tech"><span>React</span><span>JavaScript</span><span>AI assistant</span></div>
+          <a class="go" href="https://github.com/MayankDash/balancio" target="_blank" rel="noopener">View on GitHub ↗</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="github">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">On GitHub</p>
+        <h2>Two years of building.</h2>
+        <p>Each square is a month. Lit squares mark months when a project was last updated. Tap one to see what it was.</p>
+      </div>
+      <div class="gh">
+        <div class="graph">
+          <div class="graph-head"><b>github.com/MayankDash</b><span>Public projects shown</span></div>
+          <div class="grid" id="grid" role="group" aria-label="Project activity by month, 2025 to 2026"></div>
+          <div class="legend"><span><i style="background:var(--cell)"></i>No project</span><span><i style="background:color-mix(in srgb,var(--live) 55%,var(--cell))"></i>1 project</span><span><i style="background:var(--live)"></i>2+ projects</span><span><i style="background:var(--accent)"></i>AI agent work</span></div>
+          <p class="readout" id="readout" aria-live="polite"><span>Tap a lit square to see the project.</span></p>
+        </div>
+        <ol class="log">
+          <li><span class="t">2026</span><div><b>AI, agents and healthcare</b><span>AI Agent Harness, Patient Digital Twin, ANFIS Diabetes Model, Sentiment Analysis, Aadhaar UIDAI analysis, House Decor.</span></div></li>
+          <li><span class="t">2025</span><div><b>Full-stack and NLP</b><span>Balancio, Samadhan and TaskShell. Shipping complete apps across mobile, web and API.</span></div></li>
+          <li><span class="t">Before</span><div><b>Foundations</b><span>On GitHub since 2021, starting with ML experiments and problem solving in C++.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="band alt" id="hackathons">
+    <div class="wrap">
+      <div class="head">
+        <p class="eyebrow">Hackathons</p>
+        <h2>Built under pressure.</h2>
+      </div>
+      <div class="wins">
+        <div class="trophy">
+          <p class="eyebrow">Winner</p>
+          <h3>SDG Hackathon, IIT Madras</h3>
+          <p>Built a solution for the UN Sustainable Development Goals and won.</p>
+        </div>
+        <ul class="hlist">
+          <li><b>UIDAI Hackathon</b><span>2026 · Aadhaar data analysis</span></li>
+          <li><b>Smart India Hackathon</b><span>2025 · Prototype for a real-world problem</span></li>
+          <li><b>Buildspace Season 5</b><span>Startup product development</span></li>
+          <li><b>ISRO Hackathon</b><span>2024 · Space-tech engineering</span></li>
+          <li><b>AI Challenge, Hack2Skill</b><span>2024 · AI-driven problem statements</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="band contact" id="contact">
+    <div class="wrap">
+      <p class="eyebrow">Contact</p>
+      <h2>Let's build AI that <em>matters.</em></h2>
+      <p class="lede">Open to conversations about AI agents, SLMs, healthcare AI and backend systems. Email is the fastest way to reach me.</p>
+      <div class="links">
+        <div class="lk">
+          <span>Email</span>
+          <div class="row"><b id="email">mayankdash717@gmail.com</b><button class="copy" id="copy" type="button">Copy</button></div>
+        </div>
+        <a class="lk" href="https://www.linkedin.com/in/mayank-dash-848bb325b" target="_blank" rel="noopener"><span>LinkedIn</span><b>in/mayank-dash-848bb325b ↗</b></a>
+        <a class="lk" href="https://github.com/MayankDash" target="_blank" rel="noopener"><span>GitHub</span><b>github.com/MayankDash ↗</b></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Mayank Dash</span>
+    <span>AI Engineer · TatvaCare</span>
+  </div>
+</footer>
+
+<script>
+(() => {
+  /* ---------- Project filters ---------- */
+  const btns = document.querySelectorAll('.filters button');
+  const cards = document.querySelectorAll('.projects .p');
+  btns.forEach(b => b.addEventListener('click', () => {
+    const f = b.dataset.f;
+    btns.forEach(x => x.setAttribute('aria-pressed', String(x === b)));
+    cards.forEach(c => { c.hidden = !(f === 'all' || c.dataset.c === f); });
+  }));
+
+  /* ---------- GitHub month grid ---------- */
+  const work = [
+    { y: 2025, m: 4,  name: 'Balancio', note: 'AI financial management for startups' },
+    { y: 2025, m: 9,  name: 'Samadhan', note: 'Civic issue reporting app + admin dashboard' },
+    { y: 2025, m: 10, name: 'TaskShell', note: 'Natural-language command shell', ai: true },
+    { y: 2026, m: 1,  name: 'Aadhaar UIDAI Data Exploration', note: 'UIDAI Hackathon analysis' },
+    { y: 2026, m: 4,  name: 'Patient Digital Twin', note: 'Metabolic risk prediction' },
+    { y: 2026, m: 4,  name: 'ANFIS Diabetes Model', note: 'Explainable diabetes prediction' },
+    { y: 2026, m: 4,  name: 'Multi-Domain Sentiment Analysis', note: 'TF-IDF NLP pipeline' },
+    { y: 2026, m: 6,  name: 'House Decor', note: 'GraphQL e-commerce store' },
+    { y: 2026, m: 11, name: 'AI Agent Harness', note: 'ReAct agent, sandbox, memory', ai: true }
+  ];
+  const months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
+  const full = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const grid = document.getElementById('grid');
+  const readout = document.getElementById('readout');
+  let html = '<span></span>' + months.map(m => `<span class="m" aria-hidden="true">${m}</span>`).join('');
+  [2025, 2026].forEach(y => {
+    html += `<span class="y">${y}</span>`;
+    for (let m = 1; m <= 12; m++) {
+      const items = work.filter(w => w.y === y && w.m === m);
+      if (!items.length) { html += `<span class="cell" aria-hidden="true"></span>`; continue; }
+      const cls = ['cell', 'on', items.length > 1 ? 'two' : '', items.some(i => i.ai) ? 'ai' : ''].join(' ');
+      const label = `${full[m-1]} ${y}: ${items.map(i => i.name).join(', ')}`;
+      html += `<button type="button" class="${cls}" id="c-${y}-${m}" data-y="${y}" data-m="${m}" aria-pressed="false" aria-label="${label}" title="${label}"></button>`;
+    }
+  });
+  grid.innerHTML = html;
+  const show = (y, m) => {
+    const items = work.filter(w => w.y === y && w.m === m);
+    readout.innerHTML = `<b>${full[m-1]} ${y}</b> <span>·</span> ` + items.map(i => `<b>${i.name}</b> <span>${i.note}</span>`).join('<span> · </span>');
+  };
+  grid.addEventListener('click', e => {
+    const c = e.target.closest('.cell.on'); if (!c) return;
+    grid.querySelectorAll('.cell.on').forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    show(+c.dataset.y, +c.dataset.m);
+  });
+  const latest = grid.querySelector('#c-2026-11');
+  if (latest) { latest.setAttribute('aria-pressed', 'true'); show(2026, 11); }
+
+  /* ---------- Copy email ---------- */
+  const btn = document.getElementById('copy'), email = document.getElementById('email');
+  btn.addEventListener('click', () => {
+    const select = () => { const s = window.getSelection(), r = document.createRange(); r.selectNodeContents(email); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected'; };
+    try {
+      navigator.clipboard.writeText(email.textContent.trim()).then(() => { btn.textContent = 'Copied'; setTimeout(() => btn.textContent = 'Copy', 1800); }).catch(select);
+    } catch (e) { select(); }
+  });
+
+  /* ---------- Neural field ---------- */
+  const canvas = document.getElementById('field');
+  const hero = document.querySelector('.hero');
+  const ctx = canvas.getContext('2d');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let w = 0, h = 0, nodes = [], colors = {}, mx = -9999, my = -9999, running = true, raf = 0;
+  const token = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const rgba = (hex, a) => { let x = hex.replace('#', ''); if (x.length === 3) x = x.split('').map(c => c + c).join(''); const v = parseInt(x, 16); return `rgba(${(v >> 16) & 255},${(v >> 8) & 255},${v & 255},${a})`; };
+  const readColors = () => { colors = { base: token('--muted') || '#9BA7CA', hot: token('--accent') || '#FFB547', live: token('--live') || '#6EE7C8' }; };
+  function size() {
+    const r = canvas.getBoundingClientRect(), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = r.width; h = r.height; canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const count = Math.round(Math.min(110, Math.max(34, (w * h) / 9000)));
+    nodes = Array.from({ length: count }, () => ({ x: Math.random() * w, y: Math.random() * h, vx: (Math.random() - .5) * .3, vy: (Math.random() - .5) * .3, r: Math.random() * 1.6 + .9, hot: Math.random() < .14, ph: Math.random() * Math.PI * 2 }));
+  }
+  function frame(t) {
+    ctx.clearRect(0, 0, w, h);
+    const L = Math.min(150, Math.max(95, w / 9));
+    if (!reduce) for (const n of nodes) {
+      const dx = mx - n.x, dy = my - n.y, d = Math.hypot(dx, dy);
+      if (d < 220 && d > 1) { n.vx += dx / d * .012; n.vy += dy / d * .012; }
+      n.vx = n.vx * .985 + (Math.random() - .5) * .02; n.vy = n.vy * .985 + (Math.random() - .5) * .02;
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < 0 || n.x > w) n.vx *= -1; if (n.y < 0 || n.y > h) n.vy *= -1;
+      n.x = Math.max(0, Math.min(w, n.x)); n.y = Math.max(0, Math.min(h, n.y));
+    }
+    ctx.lineWidth = 1;
+    for (let i = 0; i < nodes.length; i++) {
+      const a = nodes[i];
+      for (let j = i + 1; j < nodes.length; j++) {
+        const b = nodes[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+        if (d < L) { const k = 1 - d / L; ctx.strokeStyle = (a.hot && b.hot) ? rgba(colors.hot, k * .8) : rgba(colors.base, k * .28); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+      }
+      const dm = Math.hypot(a.x - mx, a.y - my);
+      if (dm < 200) { ctx.strokeStyle = rgba(colors.live, (1 - dm / 200) * .6); ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mx, my); ctx.stroke(); }
+    }
+    for (const n of nodes) {
+      const glow = n.hot ? (.65 + .35 * Math.sin(t / 700 + n.ph)) : .7;
+      ctx.fillStyle = n.hot ? rgba(colors.hot, glow) : rgba(colors.base, .7);
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.hot ? n.r + 1 : n.r, 0, Math.PI * 2); ctx.fill();
+    }
+    if (!reduce && running) raf = requestAnimationFrame(frame);
+  }
+  const start = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(frame); };
+  readColors(); size(); frame(0); if (!reduce) start();
+  hero.addEventListener('pointermove', e => { const r = canvas.getBoundingClientRect(); mx = e.clientX - r.left; my = e.clientY - r.top; if (reduce) frame(0); });
+  hero.addEventListener('pointerleave', () => { mx = -9999; my = -9999; if (reduce) frame(0); });
+  let rt; window.addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { size(); frame(0); }, 150); });
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e]) => { running = e.isIntersecting; if (running && !reduce) start(); }).observe(hero);
+  const refresh = () => { readColors(); frame(0); };
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', refresh);
+  new MutationObserver(refresh).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+})();
+</script>
+</body>
+</html>
